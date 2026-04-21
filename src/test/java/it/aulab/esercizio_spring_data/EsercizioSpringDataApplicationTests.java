@@ -17,11 +17,13 @@ import it.aulab.esercizio_spring_data.repositories.CommentRepository;
 @AutoConfigureTestDatabase(replace=AutoConfigureTestDatabase.Replace.NONE)
 class EsercizioSpringDataApplicationTests {
 
+	// Test su Author
+
 	@Autowired
 	AuthorRepository authorRepository;
 
 	@BeforeEach
-	void load(){
+	void loadAuthor(){
 		Author a1 = new Author();
 		a1.setName("Valentino");
 		a1.setSurname("Rossi");
@@ -30,10 +32,8 @@ class EsercizioSpringDataApplicationTests {
 	}
 
 	@Test
-	void contextLoads() {
+	void contextLoadsAuthor() {
 	}
-
-	// Test su Author
 
 	@Test
 	void findByName(){
@@ -63,15 +63,34 @@ class EsercizioSpringDataApplicationTests {
 	CommentRepository commentRepository;
 
 	@BeforeEach
-	void load(){
+	void loadComment(){
 		Comment c1 = new Comment();
 		c1.setEmail("tizio@boh.it");
 		commentRepository.save(c1);
 	}
 
 	@Test
+	void contextLoadsComment(){
+
+	}
+
+	@Test
 	void findByEmail(){
-		assertThat(commentRepository.findByEmail())
+		assertThat(commentRepository.findByEmail("tizio@boh.it"))
+		.extracting("email")
+		.containsOnly("tizio@boh.it");
+	}
+
+	@Test
+	void commentWithSameEmail(){
+		assertThat(commentRepository.commentWithSameEmail())
+		.extracting("email")
+		.containsOnly("tizio@boh.it");
+	}
+
+	@Test
+	void commentWithSameEmailNonNative(){
+		assertThat(commentRepository.commentWithSameEmailNonNative())
 		.extracting("email")
 		.containsOnly("tizio@boh.it");
 	}
