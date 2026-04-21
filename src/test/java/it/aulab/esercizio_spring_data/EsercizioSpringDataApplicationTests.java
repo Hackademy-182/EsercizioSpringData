@@ -8,7 +8,9 @@ import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
 
 import it.aulab.esercizio_spring_data.models.Author;
+import it.aulab.esercizio_spring_data.models.Comment;
 import it.aulab.esercizio_spring_data.repositories.AuthorRepository;
+import it.aulab.esercizio_spring_data.repositories.CommentRepository;
 
 // @SpringBootTest
 @DataJpaTest
@@ -31,6 +33,8 @@ class EsercizioSpringDataApplicationTests {
 	void contextLoads() {
 	}
 
+	// Test su Author
+
 	@Test
 	void findByName(){
 		assertThat(authorRepository.findByName("Giuseppe"))
@@ -46,10 +50,29 @@ class EsercizioSpringDataApplicationTests {
 	}
 
 	@Test
-	void sameNameNonNative(){
-		assertThat(authorRepository.sameNameNonNative())
+	void sameAuthorNameNonNative(){
+		assertThat(authorRepository.sameAuthorNameNonNative())
 		.extracting("name")
 		.containsOnly("Giuseppe");
 	}
 	// Il codice dovrebbe essere corretto, ma mi dice che fallisce nel caricare ApplicationContext. Solo con l'ultimo test, gli altri funzionavano.
+
+	// Test su Comment
+
+	@Autowired
+	CommentRepository commentRepository;
+
+	@BeforeEach
+	void load(){
+		Comment c1 = new Comment();
+		c1.setEmail("tizio@boh.it");
+		commentRepository.save(c1);
+	}
+
+	@Test
+	void findByEmail(){
+		assertThat(commentRepository.findByEmail())
+		.extracting("email")
+		.containsOnly("tizio@boh.it");
+	}
 }
