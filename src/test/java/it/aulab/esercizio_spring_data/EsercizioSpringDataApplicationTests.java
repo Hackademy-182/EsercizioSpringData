@@ -97,7 +97,7 @@ class EsercizioSpringDataApplicationTests {
 	}
 
 	@Test
-	@Transactional(propagation = Propagation.NOT_SUPPORTED)
+	@Transactional
 	void postsWithSameTitle() {
     	assertThat(postRepository.postsWithSameTitle())
         .extracting("title")

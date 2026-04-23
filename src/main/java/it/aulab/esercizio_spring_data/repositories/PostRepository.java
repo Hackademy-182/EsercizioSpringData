@@ -16,9 +16,9 @@ public interface PostRepository extends CrudRepository<Post, Long> {
 
     List<Post> findByTitleAndBody(String title, String body);
 
-    @Query(value = "SELECT * FROM posts p WHERE p.title = 'Titolo post'", nativeQuery = true)
+    @Query(value = "SELECT * FROM posts p WHERE p.title = 'Primo'", nativeQuery = true)
     List<Post> postsWithSameTitle();
 
-    @Query("SELECT p FROM Post p WHERE p.title = 'Titolo post'")
+    @Query("SELECT p FROM Post p WHERE p.title = 'Primo'")
     List<Post> samePostTitleNonNative();
 }
