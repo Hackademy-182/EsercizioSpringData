@@ -13,6 +13,6 @@ public interface CommentRepository extends CrudRepository<Comment, Long> {
     @Query(value = "SELECT * FROM comments c WHERE c.email = 'tizio@boh.it'", nativeQuery=true)
     List<Comment> commentWithSameEmail();
 
-    @Query(value = "SELECT * FROM comments c WHERE c.email = 'tizio@boh.it'")
+    @Query(value = "SELECT c FROM Comment c WHERE c.email = 'tizio@boh.it'")
     List<Comment> commentWithSameEmailNonNative();
 }

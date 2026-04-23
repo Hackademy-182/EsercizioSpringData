@@ -17,6 +17,6 @@ public interface AuthorRepository extends CrudRepository<Author, Long> {
     @Query(value = "SELECT * FROM authors a WHERE a.name = 'Valentino'", nativeQuery = true)
     List<Author> authorsWithSameName();
 
-    @Query(value = "SELECT * FROM authors a WHERE a.name = 'Valentino'")
+    @Query(value = "SELECT a FROM Author a WHERE a.name = 'Valentino'")
     List<Author> sameAuthorNameNonNative();
 }
