@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Propagation;
 
 import it.aulab.esercizio_spring_data.models.Author;
 import it.aulab.esercizio_spring_data.models.Comment;
@@ -96,7 +97,7 @@ class EsercizioSpringDataApplicationTests {
 	}
 
 	@Test
-	@Transactional
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	void postsWithSameTitle() {
     	assertThat(postRepository.postsWithSameTitle())
         .extracting("title")
