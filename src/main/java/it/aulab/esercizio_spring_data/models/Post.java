@@ -36,7 +36,7 @@ public class Post {
     // Relazioni One to Many
     
     @OneToMany(mappedBy="post")
-    @JsonIgnoreProperties("comments")
+    @JsonIgnoreProperties("post")
     private List<Comment> comments = new ArrayList<Comment>();
 
     // Costruttore vuoto

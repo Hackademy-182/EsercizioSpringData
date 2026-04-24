@@ -25,7 +25,7 @@ public class Comment {
     private String date;
     @ManyToOne
     @JoinColumn(name="post_id", nullable=false)
-    @JsonIgnoreProperties("posts")
+    @JsonIgnoreProperties("comments")
     private Post post;
 
     // costruttore vuoto
