@@ -1,5 +1,7 @@
 package it.aulab.esercizio_spring_data.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,6 +25,7 @@ public class Comment {
     private String date;
     @ManyToOne
     @JoinColumn(name="post_id", nullable=false)
+    @JsonIgnoreProperties("posts")
     private Post post;
 
     // costruttore vuoto

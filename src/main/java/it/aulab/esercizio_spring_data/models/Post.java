@@ -17,7 +17,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "posts")
-@JsonIgnoreProperties({"author"})
+// @JsonIgnoreProperties({"author"})
 public class Post {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -30,11 +30,13 @@ public class Post {
     private String publishDate;
     @ManyToOne
     @JoinColumn(name="author_id")
+    @JsonIgnoreProperties("posts")
     private Author author;
 
     // Relazioni One to Many
     
     @OneToMany(mappedBy="post")
+    @JsonIgnoreProperties("comments")
     private List<Comment> comments = new ArrayList<Comment>();
 
     // Costruttore vuoto
