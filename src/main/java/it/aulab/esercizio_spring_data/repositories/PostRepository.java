@@ -3,11 +3,11 @@ package it.aulab.esercizio_spring_data.repositories;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.ListCrudRepository;
 
 import it.aulab.esercizio_spring_data.models.Post;
 
-public interface PostRepository extends CrudRepository<Post, Long> {
+public interface PostRepository extends ListCrudRepository<Post, Long> {
 
     
     List<Post> findByTitle(String title);
