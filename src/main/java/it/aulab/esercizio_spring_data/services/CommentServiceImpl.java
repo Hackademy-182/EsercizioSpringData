@@ -9,13 +9,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import it.aulab.esercizio_spring_data.models.Comment;
+import it.aulab.esercizio_spring_data.models.Post;
 import it.aulab.esercizio_spring_data.repositories.CommentRepository;
+import it.aulab.esercizio_spring_data.repositories.PostRepository;
 
 @Service
 public class CommentServiceImpl implements CommentService{
 
     @Autowired
     CommentRepository commentRepository;
+
+    @Autowired
+    PostRepository postRepository;
 
     @Override
     public List<Comment> readAll() {
@@ -43,20 +48,39 @@ public class CommentServiceImpl implements CommentService{
 
     @Override
     public Comment create(Comment comment) {
-        if (comment.getEmail() == null || comment.getBody() == null) {
+        if (comment.getEmail() == null || comment.getBody() == null || comment.getPost() == null) {
              throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }else{
+            Long postId = comment.getPost().getId();
+
+            Post post = postRepository.findById(postId)
+                                        .orElseThrow(() -> 
+                                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Post not found"));
+
+            comment.setPost(post);
+
             return commentRepository.save(comment);
         }
     }
 
-    @Override
+   @Override
     public Comment update(Long id, Comment comment) {
         if (commentRepository.existsById(id)) {
+
+            if (comment.getPost() != null) {
+            Long postId = comment.getPost().getId();
+
+            Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+            comment.setPost(post);
+            }
+
             comment.setId(id);
             return commentRepository.save(comment);
-        }else{
-             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+
+        } else {
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
 
