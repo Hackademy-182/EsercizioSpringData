@@ -49,4 +49,5 @@ public class AuthorController {
         authorService.delete(id);
     }
 
+    // Nel video, qui nel controller, non inserivi le funzioni per cercare per nome, cognome o entrambi.
 }
