@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.aulab.esercizio_spring_data.dtos.AuthorDTO;
 import it.aulab.esercizio_spring_data.models.Author;
 import it.aulab.esercizio_spring_data.services.AuthorService;
 
@@ -24,22 +25,22 @@ public class AuthorRestController {
     AuthorService authorService;
 
     @GetMapping
-    public List<Author> getAllAuthors(){
+    public List<AuthorDTO> getAllAuthors(){
         return authorService.readAll();
     }
 
     @GetMapping("{id}")
-    public Author getAuthor(@PathVariable ("id") Long id){
+    public AuthorDTO getAuthor(@PathVariable ("id") Long id){
         return authorService.read(id);
     }
 
     @PostMapping
-    public Author createAuthor(@RequestBody Author author){
+    public AuthorDTO createAuthor(@RequestBody Author author){
         return authorService.create(author);
     }
 
     @PutMapping("{id}")
-    public Author updateAuthor(@PathVariable("id") Long id, @RequestBody Author author){
+    public AuthorDTO updateAuthor(@PathVariable("id") Long id, @RequestBody Author author){
         // author.setId(id);
         return authorService.update(id, author);
     }
