@@ -16,8 +16,8 @@ import it.aulab.esercizio_spring_data.models.Post;
 import it.aulab.esercizio_spring_data.services.PostService;
 
 @RestController
-@RequestMapping("/posts")
-public class PostController {
+@RequestMapping("/api/posts")
+public class PostRestController {
 
     @Autowired
     PostService postService;

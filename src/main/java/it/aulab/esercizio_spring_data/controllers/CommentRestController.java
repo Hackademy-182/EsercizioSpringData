@@ -17,8 +17,8 @@ import it.aulab.esercizio_spring_data.models.Comment;
 import it.aulab.esercizio_spring_data.services.CommentService;
 
 @RestController
-@RequestMapping("/comments")
-public class CommentController {
+@RequestMapping("/api/comments")
+public class CommentRestController {
 
     @Autowired
     CommentService commentService;
